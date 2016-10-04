@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using DirectoryPlusOne.DAL;
+using Microsoft.EntityFrameworkCore;
 
 namespace DirectoryPlusOne
 {
@@ -28,7 +30,13 @@ namespace DirectoryPlusOne
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<DirectoryContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("LocalDBConnection")));
+
             services.AddMvc();
+           
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,7 +15,6 @@ namespace DirectoryPlusOne.DAL
 
         public DirectoryContext(DbContextOptions<DirectoryContext> options) : base(options)
         {
-
         }
         public DbSet<Office> Offices { get; set; }
         public DbSet<Person> People { get; set; }
