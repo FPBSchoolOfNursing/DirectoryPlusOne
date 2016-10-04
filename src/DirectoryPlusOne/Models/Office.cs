@@ -9,7 +9,7 @@ namespace DirectoryPlusOne.Models
     public class Office
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OfficeId { get; set; }
+        public int OfficeID { get; set; }
         public string CaseUserId { get; set; }
         public string RoomNumber { get; set; }
         public string Building { get; set; }

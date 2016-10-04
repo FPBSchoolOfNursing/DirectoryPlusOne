@@ -8,8 +8,8 @@ namespace DirectoryPlusOne.Models
 {
     public class PersonRole
     {
-        [Key]
-        public int RoleId { get; set; }
+        
+        public int RoleID { get; set; }
         public string Role { get; set; }
         public DateTime Expires { get; set; }
         public virtual Person Person { get; set; }

@@ -9,7 +9,7 @@ namespace DirectoryPlusOne.Models
     public class Group
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int GroupId { get; set; }
+        public int GroupID { get; set; }
         public string GroupName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
