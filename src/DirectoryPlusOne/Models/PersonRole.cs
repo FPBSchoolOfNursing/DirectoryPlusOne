@@ -11,7 +11,7 @@ namespace DirectoryPlusOne.Models
         
         public int RoleID { get; set; }
         public string Role { get; set; }
-        public DateTime Expires { get; set; }
+        public DateTime? Expires { get; set; }
         public virtual Person Person { get; set; }
     }
 }

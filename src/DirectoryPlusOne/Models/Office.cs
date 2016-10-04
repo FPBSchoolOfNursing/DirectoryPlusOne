@@ -14,7 +14,7 @@ namespace DirectoryPlusOne.Models
         public string RoomNumber { get; set; }
         public string Building { get; set; }
         public string PhoneNumber { get; set; }
-        public float SquareFeet { get; set; }
+        public float? SquareFeet { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public string Elevation { get; set; }

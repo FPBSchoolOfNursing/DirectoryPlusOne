@@ -20,7 +20,7 @@ namespace DirectoryPlusOne.Models
         public string Prefix { get; set; }
         public string Suffix { get; set; }
         public string Title { get; set; }
-        public DateTime LastModified { get; set; }
+        public DateTime? LastModified { get; set; }
         public virtual ICollection<PersonRole> Roles { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Office> Offices { get; set; }
