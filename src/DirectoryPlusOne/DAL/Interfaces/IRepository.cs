@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DirectoryPlusOne.Models
+namespace DirectoryPlusOne.DAL.Interfaces
 {
     public interface IRepository<T>
     {
