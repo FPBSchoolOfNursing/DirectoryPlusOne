@@ -12,6 +12,11 @@ namespace DirectoryPlusOne.DAL
 {
     public class DirectoryContext : DbContext, IDirectoryContext
     {
+
+        public DirectoryContext(DbContextOptions<DirectoryContext> options) : base(options)
+        {
+
+        }
         public DbSet<Office> Offices { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<PersonRole> Roles { get; set; }
@@ -19,13 +24,14 @@ namespace DirectoryPlusOne.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-           
+           //optionsBuilder.UseSqlServer()
         }
-        /*
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
-        */
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {           
+            modelBuilder.Entity<Person>().ToTable("Person"); //Remove the pluralization of table names.
+            modelBuilder.Entity<PersonRole>().ToTable("PersonRole");
+        }      
+        
     }
 }
