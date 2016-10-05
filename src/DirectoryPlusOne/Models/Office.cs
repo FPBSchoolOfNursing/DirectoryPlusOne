@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace DirectoryPlusOne.Models
 {
     public class Office
-    {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    {       
         public int OfficeID { get; set; }
         public string CaseUserID { get; set; }
         public string RoomNumber { get; set; }
@@ -19,6 +18,6 @@ namespace DirectoryPlusOne.Models
         public string Latitude { get; set; }
         public string Elevation { get; set; }
 
-        public virtual ICollection<Person> People { get; set; }
+        public virtual ICollection<PersonOffice> PersonOffice { get; set; }
     }
 }

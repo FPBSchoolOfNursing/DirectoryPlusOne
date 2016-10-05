@@ -15,6 +15,6 @@ namespace DirectoryPlusOne.Models
         public string Email { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<Person> People { get; set; }
+        public virtual ICollection<PersonGroup> PersonGroup { get; set; }
     }
 }

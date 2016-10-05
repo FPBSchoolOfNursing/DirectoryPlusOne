@@ -9,7 +9,8 @@ namespace DirectoryPlusOne.Models
 {
     public class Person
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]       
+        [Key] 
         public string CaseUserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -22,7 +23,7 @@ namespace DirectoryPlusOne.Models
         public string Title { get; set; }
         public DateTime? LastModified { get; set; }
         public virtual ICollection<PersonRole> Roles { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Office> Offices { get; set; }
+        public virtual ICollection<PersonGroup> PersonGroup { get; set; }
+        public virtual ICollection<PersonOffice> PersonOffice { get; set; }
     }
 }
