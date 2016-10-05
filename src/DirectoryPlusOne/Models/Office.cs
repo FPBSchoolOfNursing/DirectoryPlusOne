@@ -10,7 +10,7 @@ namespace DirectoryPlusOne.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OfficeID { get; set; }
-        public string CaseUserId { get; set; }
+        public string CaseUserID { get; set; }
         public string RoomNumber { get; set; }
         public string Building { get; set; }
         public string PhoneNumber { get; set; }
