@@ -22,6 +22,7 @@ namespace DirectoryPlusOne.Controllers.API
         [HttpGet]
         public IEnumerable<DirectoryReturn> Get()
         {
+            int i = 0;
             var directory = (from p in _context.People
                              join o in _context.Offices on p.CaseUserID equals o.CaseUserID
                              select new DirectoryReturn {
@@ -29,7 +30,8 @@ namespace DirectoryPlusOne.Controllers.API
                                  Location = o.Building + " " + o.RoomNumber,
                                  Name = p.FirstName + " " + p.LastName,
                                  OfficePhone = o.PhoneNumber,
-                                 PersonPhone = p.PhoneNumber
+                                 PersonPhone = p.PhoneNumber,
+                                 Modified = p.LastModified
                              }).ToArray();
 
             return directory;
