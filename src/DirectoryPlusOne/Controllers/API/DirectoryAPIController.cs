@@ -21,8 +21,7 @@ namespace DirectoryPlusOne.Controllers.API
         // GET: api/values
         [HttpGet]
         public IEnumerable<DirectoryReturn> Get()
-        {
-            int i = 0;
+        {            
             var directory = (from p in _context.People
                              join o in _context.Offices on p.CaseUserID equals o.CaseUserID
                              select new DirectoryReturn {
