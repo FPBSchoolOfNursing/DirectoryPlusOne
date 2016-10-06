@@ -16,10 +16,10 @@ namespace DirectoryPlusOne.DAL
         public DirectoryContext(DbContextOptions<DirectoryContext> options) : base(options)
         {
         }
-        public DbSet<Office> Offices { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<PersonRole> Roles { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Office> Offices { get; set; }
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PersonRole> Roles { get; set; }
+        public virtual DbSet<Group> Groups { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

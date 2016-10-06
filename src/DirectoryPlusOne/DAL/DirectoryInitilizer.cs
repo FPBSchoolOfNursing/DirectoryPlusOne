@@ -15,15 +15,8 @@ namespace DirectoryPlusOne.DAL
             {
                 return; //the db is seeded
             }
-
-            var people = new Person[]
-                {
-                    new Person { CaseUserID = "abc123", FirstName = "Alice", LastName="Contera", LastModified=DateTime.Now, PhoneNumber="216-368-0000" },
-                    new Person { CaseUserID = "abc124", FirstName = "Alice2", LastName="Contera2", LastModified=DateTime.Now, PhoneNumber="216-368-2000"},
-                    new Person { CaseUserID = "abc1250", FirstName = "Alice3", LastName="Contera3", LastModified=DateTime.Now, PhoneNumber="216-368-3000" }
-                };
-
-            foreach (Person p in people)
+            
+            foreach (Person p in GetFakePeople)
             {
                context.People.Add(p);
             }
@@ -55,5 +48,19 @@ namespace DirectoryPlusOne.DAL
             }            
             context.SaveChanges();
         }
+
+        public static Person[] GetFakePeople
+        {
+            get
+            {
+                return new Person[]
+                {
+                    new Person { CaseUserID = "abc123", FirstName = "Alice", LastName="Contera", LastModified=DateTime.Now, PhoneNumber="216-368-0000" },
+                    new Person { CaseUserID = "abc124", FirstName = "Alice2", LastName="Contera2", LastModified=DateTime.Now, PhoneNumber="216-368-2000"},
+                    new Person { CaseUserID = "abc1250", FirstName = "Alice3", LastName="Contera3", LastModified=DateTime.Now, PhoneNumber="216-368-3000" }
+                };
+            }
+        }
+
     }
 }
