@@ -21,28 +21,14 @@ namespace DirectoryPlusOne.DAL
                context.People.Add(p);
             }
             context.SaveChanges();
-
-            var offices = new Office[] {
-                    new Office { CaseUserID = "abc123", Building = "Nursing", RoomNumber="219G" },
-                    new Office { CaseUserID = "abc124", Building = "Nursing", RoomNumber="219G" },
-                    new Office { CaseUserID = "abc1250", Building = "Wood", RoomNumber="215" },
-                    new Office { Building = "Nursing", RoomNumber="1115" },
-                    new Office { Building = "MiddleEarth", RoomNumber="NOB150" },
-                };
-
-            foreach(Office o in offices)
+            
+            foreach (Office o in GetFakesOffices)
             {
                 context.Offices.Add(o);
             }         
             context.SaveChanges();
-
-            var groups = new Group[]
-                {
-                    new Group { GroupName = "nurs-dept-it", Description="Nursing IT", Email="fpbhelpdesk@case.edu" },
-                    new Group { GroupName = "utech", Description="uTech peeps", Email="utech@case.edu" },
-                };
-
-            foreach (Group g in groups)
+          
+            foreach (Group g in GetFakeGroups)
             {
                 context.Groups.Add(g);
             }            
@@ -62,5 +48,28 @@ namespace DirectoryPlusOne.DAL
             }
         }
 
+        public static Office[] GetFakesOffices
+        {
+            get {
+                return new Office[] {
+                    new Office { CaseUserID = "abc123", Building = "Nursing", RoomNumber="219G" },
+                    new Office { CaseUserID = "abc124", Building = "Nursing", RoomNumber="219G" },
+                    new Office { CaseUserID = "abc1250", Building = "Wood", RoomNumber="215" },
+                    new Office { Building = "Nursing", RoomNumber="1115" },
+                    new Office { Building = "MiddleEarth", RoomNumber="NOB150" },
+                };
+            }
+        }
+
+        public static Group[] GetFakeGroups
+        {
+            get
+            {
+                return new Group[] {
+                        new Group { GroupName = "nurs-dept-it", Description="Nursing IT", Email="fpbhelpdesk@case.edu" },
+                        new Group { GroupName = "utech", Description="uTech peeps", Email="utech@case.edu" },
+                };
+            }
+        }
     }
 }
