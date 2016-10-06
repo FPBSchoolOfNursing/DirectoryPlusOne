@@ -31,7 +31,7 @@ namespace DirectoryPlusOne.Controllers.API
                                  OfficePhone = o.PhoneNumber,
                                  PersonPhone = p.PhoneNumber,
                                  Modified = p.LastModified
-                             }).ToArray();
+                             }).ToArray(); //returning arrays are more savvy
 
             return directory;
         }
