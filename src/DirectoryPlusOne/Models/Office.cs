@@ -8,8 +8,7 @@ namespace DirectoryPlusOne.Models
 {
     public class Office
     {       
-        public int OfficeID { get; set; }
-        public string CaseUserID { get; set; }
+        public int OfficeID { get; set; }        
         public string RoomNumber { get; set; }
         public string Building { get; set; }
         public string PhoneNumber { get; set; }
