@@ -12,7 +12,7 @@ namespace DirectoryPlusOne.DAL
         {
             context.Database.EnsureCreated();
             if (context.People.Any())
-            {
+            {                
                 return; //the db is seeded
             }
             
@@ -32,6 +32,18 @@ namespace DirectoryPlusOne.DAL
             {
                 context.Groups.Add(g);
             }            
+            context.SaveChanges();
+
+            foreach (PersonOffice po in GetFakePersonOffices)
+            {
+                context.PersonOffice.Add(po);
+            }
+            context.SaveChanges();
+
+            foreach (PersonGroup pg in GetFakePersonGroups)
+            {
+                context.PersonGroup.Add(pg);
+            }
             context.SaveChanges();
         }
 
@@ -55,7 +67,7 @@ namespace DirectoryPlusOne.DAL
             get {
                 return new Office[] {
                     new Office { Building = "Nursing", RoomNumber="219G" },
-                    new Office { Building = "Nursing", RoomNumber="219G" },
+                    new Office { Building = "Nursing", RoomNumber="219F" },
                     new Office { Building = "Wood", RoomNumber="215" },
                     new Office { Building = "Nursing", RoomNumber="1115" },
                     new Office { Building = "MiddleEarth", RoomNumber="NOB150" },
@@ -74,20 +86,38 @@ namespace DirectoryPlusOne.DAL
                 };
             }
         }
-
+      
         public static PersonGroup[] GetFakePersonGroups
         {
             get
             {
-                //var nursitgroupid = GetFakeGroups.SingleOrDefault(a => a.GroupName == "nurs-dept-it").GroupID;
+                return new PersonGroup[] {
+                    new PersonGroup {
+                        CaseUserID = GetFakePeople.Single(a => a.LastName == "Contera").CaseUserID,
+                        GroupID = GetFakeGroups.Single(a => a.GroupName == "utech").GroupID
+                    },
+                    new PersonGroup {
+                        CaseUserID = GetFakePeople.Single(a => a.LastName == "Contera2").CaseUserID,
+                        GroupID = GetFakeGroups.Single(a => a.GroupName == "utech").GroupID
+                    }
+                };
+            }
+        }
 
-                return new PersonGroup[]
-                {
-                    new PersonGroup { GroupID = 0, CaseUserID = "abc123"}, //put the first two people in nurs-dept-it
-                    new PersonGroup { GroupID = 0, CaseUserID = "abc124"},
-                    new PersonGroup { GroupID = 1, CaseUserID = "abc1250"}, //put the last two people in utech
-                    new PersonGroup { GroupID = 1, CaseUserID = "abc1250"},
-                    new PersonGroup { GroupID = 2, CaseUserID = "not140"}, //Not InOffice is in this group
+      
+        public static PersonOffice[] GetFakePersonOffices
+        {
+            get
+            {
+                return new PersonOffice[] {
+                    new PersonOffice {
+                        CaseUserID = GetFakePeople.Single(a => a.LastName == "Contera").CaseUserID,
+                        OfficeID = GetFakesOffices.Single(a => a.Building == "Nursing" && a.RoomNumber == "219G").OfficeID,
+                    },
+                    new PersonOffice {
+                        CaseUserID = GetFakePeople.Single(a => a.LastName == "Contera2").CaseUserID,
+                        OfficeID = GetFakesOffices.Single(a => a.Building == "Nursing" && a.RoomNumber == "219F").OfficeID,
+                    }
                 };
             }
         }

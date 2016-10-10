@@ -18,6 +18,8 @@ namespace DirectoryPlusOne.DAL
         }
         public virtual DbSet<Office> Offices { get; set; }
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<PersonOffice> PersonOffice { get; set; }
+        public virtual DbSet<PersonGroup> PersonGroup { get; set; }
         public virtual DbSet<PersonRole> Roles { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
 

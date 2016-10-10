@@ -23,7 +23,8 @@ namespace DirectoryPlusOne.Controllers.API
         public IEnumerable<DirectoryReturn> Get()
         {            
             var directory = (from p in _context.People
-                             join o in _context.Offices on p.CaseUserID equals o.CaseUserID
+                             join po in _context.PersonOffice on p.CaseUserID equals po.CaseUserID
+                             join o in _context.Offices on po.OfficeID equals o.OfficeID
                              select new DirectoryReturn {
                                  Email = p.CaseUserID + "@case.edu",
                                  Location = o.Building + " " + o.RoomNumber,
@@ -38,9 +39,12 @@ namespace DirectoryPlusOne.Controllers.API
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public DirectoryReturn Get(int id)
         {
-            return "value";
+            var directoryitem = (from p in _context.Offices
+                                 where p.OfficeID == id
+                                select new DirectoryReturn { OfficePhone = p.PhoneNumber, Name = p.Building + " " + p.RoomNumber }).SingleOrDefault();
+            return directoryitem;
         }
 
         // POST api/values
