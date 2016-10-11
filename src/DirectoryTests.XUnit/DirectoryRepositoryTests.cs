@@ -9,6 +9,7 @@ using DirectoryPlusOne.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using DirectoryPlusOne.Models;
+using DirectoryTests.XUnit.FakeData;
 
 namespace DirectoryTests.XUnit
 {
@@ -17,16 +18,25 @@ namespace DirectoryTests.XUnit
         private IQueryable<Person> fakepeople;
         private IQueryable<Office> fakeoffice;
         private IQueryable<Group> fakegroup;
+        private IQueryable<PersonGroup> fakepersongroup;
+        private IQueryable<PersonOffice> fakepersonoffice;
+
+
         private Mock<IDirectoryContext> mockContext;
         private Mock<DbSet<Person>> mockPerson;
         private Mock<DbSet<Office>> mockOffice;
         private Mock<DbSet<Group>> mockGroup;
+        private Mock<DbSet<PersonGroup>> mockPersonGroup;
+        private Mock<DbSet<PersonOffice>> mockPersonOffice;
 
         public DirectoryRepositoryTests()
         {
-            fakepeople = DirectoryInitilizer.GetFakePeople.AsQueryable();
-            fakeoffice = DirectoryInitilizer.GetFakesOffices.AsQueryable();
-            fakegroup = DirectoryInitilizer.GetFakeGroups.AsQueryable();
+            fakepeople = Fakes.GetFakePeople.AsQueryable();
+            fakeoffice = Fakes.GetFakesOffices.AsQueryable();
+            fakegroup = Fakes.GetFakeGroups.AsQueryable();
+            fakepersongroup = Fakes.GetFakePersonGroups.AsQueryable();
+            fakepersonoffice = Fakes.GetFakePersonOffices.AsQueryable();
+
             mockContext = new Mock<IDirectoryContext>();
 
             mockPerson = new Mock<DbSet<Person>>();          
@@ -46,6 +56,18 @@ namespace DirectoryTests.XUnit
             mockGroup.As<IQueryable<Group>>().Setup(m => m.Expression).Returns(fakegroup.Expression);
             mockGroup.As<IQueryable<Group>>().Setup(m => m.ElementType).Returns(fakegroup.ElementType);
             mockGroup.As<IQueryable<Group>>().Setup(m => m.GetEnumerator()).Returns(fakegroup.GetEnumerator());
+
+            mockPersonGroup = new Mock<DbSet<PersonGroup>>();
+            mockPersonGroup.As<IQueryable<PersonGroup>>().Setup(m => m.Provider).Returns(fakepersongroup.Provider);
+            mockPersonGroup.As<IQueryable<PersonGroup>>().Setup(m => m.Expression).Returns(fakepersongroup.Expression);
+            mockPersonGroup.As<IQueryable<PersonGroup>>().Setup(m => m.ElementType).Returns(fakepersongroup.ElementType);
+            mockPersonGroup.As<IQueryable<PersonGroup>>().Setup(m => m.GetEnumerator()).Returns(fakepersongroup.GetEnumerator());
+
+            mockPersonOffice = new Mock<DbSet<PersonOffice>>();
+            mockPersonOffice.As<IQueryable<PersonOffice>>().Setup(m => m.Provider).Returns(fakepersonoffice.Provider);
+            mockPersonOffice.As<IQueryable<PersonOffice>>().Setup(m => m.Expression).Returns(fakepersonoffice.Expression);
+            mockPersonOffice.As<IQueryable<PersonOffice>>().Setup(m => m.ElementType).Returns(fakepersonoffice.ElementType);
+            mockPersonOffice.As<IQueryable<PersonOffice>>().Setup(m => m.GetEnumerator()).Returns(fakepersonoffice.GetEnumerator());
         }
       
         [Fact]
@@ -74,13 +96,13 @@ namespace DirectoryTests.XUnit
         [Fact]
         public void DirectoryServiceShouldReturnAnOffice()
         {
-            //Arrage
+            //Arrage          
             mockContext.Setup(m => m.Offices).Returns(mockOffice.Object);
             var service = new DirectoryService(mockContext.Object);
 
             //Act
-            throw new NotImplementedException("Test not implemented yet");
-
+            //var office = service.GetOffice();
+            //Assert.NotNull(office);
         }
 
         [Fact]

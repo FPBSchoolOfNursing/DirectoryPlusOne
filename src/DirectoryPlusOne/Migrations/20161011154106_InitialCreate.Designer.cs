@@ -8,8 +8,8 @@ using DirectoryPlusOne.DAL;
 namespace DirectoryPlusOne.Migrations
 {
     [DbContext(typeof(DirectoryContext))]
-    [Migration("20161010215546_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20161011154106_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

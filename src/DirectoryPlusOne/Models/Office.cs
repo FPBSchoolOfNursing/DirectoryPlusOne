@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DirectoryPlusOne.Models
 {
     public class Office
-    {       
+    {   
         public int OfficeID { get; set; }        
         public string RoomNumber { get; set; }
         public string Building { get; set; }
