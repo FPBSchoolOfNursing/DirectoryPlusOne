@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DirectoryPlusOne.DAL;
 using DirectoryPlusOne.Models;
+using DirectoryPlusOne.DAL.Interfaces;
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DirectoryPlusOne.Controllers.API
@@ -12,28 +13,42 @@ namespace DirectoryPlusOne.Controllers.API
     [Route("directory")]
     public class DirectoryAPIController : Controller
     {
-        private readonly DirectoryContext _context;
-        public DirectoryAPIController(DirectoryContext context)
+        private readonly IDirectoryContext _context;
+        public DirectoryAPIController(IDirectoryContext context)
         {
             _context = context;
         }
 
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<DirectoryReturn> Get()
-        {            
+        // GET: directory
+        [HttpGet("{group}")]
+        public IEnumerable<DirectoryReturn> Get(string group)
+        {
+            return GetDirectoryByGroup(group);
+        }
+
+        [HttpGet("{group}/{subgroup}")]
+        public IEnumerable<DirectoryReturn> Get(string group, string subgroup)
+        {
+            return GetDirectoryByGroup(subgroup);
+        }
+
+        private IEnumerable<DirectoryReturn> GetDirectoryByGroup(string querygroup)
+        {
             var directory = (from p in _context.People
                              join po in _context.PersonOffice on p.CaseUserID equals po.CaseUserID
                              join o in _context.Offices on po.OfficeID equals o.OfficeID
-                             select new DirectoryReturn {
+                             join pg in _context.PersonGroup on p.CaseUserID equals pg.CaseUserID
+                             join g in _context.Groups on pg.GroupID equals g.GroupID
+                             where g.GroupName == querygroup
+                             select new DirectoryReturn
+                             {
                                  Email = p.CaseUserID + "@case.edu",
                                  Location = o.Building + " " + o.RoomNumber,
                                  Name = p.FirstName + " " + p.LastName,
                                  OfficePhone = o.PhoneNumber,
                                  PersonPhone = p.PhoneNumber,
                                  Modified = p.LastModified
-                             }).ToArray(); //returning arrays are more savvy
-
+                             }).ToArray(); //returning arrays are more savvy)
             return directory;
         }
 

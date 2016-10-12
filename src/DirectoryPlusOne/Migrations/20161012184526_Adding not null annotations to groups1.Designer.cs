@@ -8,8 +8,8 @@ using DirectoryPlusOne.DAL;
 namespace DirectoryPlusOne.Migrations
 {
     [DbContext(typeof(DirectoryContext))]
-    [Migration("20161011175209_FirstWorkingState")]
-    partial class FirstWorkingState
+    [Migration("20161012184526_Adding not null annotations to groups1")]
+    partial class Addingnotnullannotationstogroups1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,13 +22,19 @@ namespace DirectoryPlusOne.Migrations
                     b.Property<int>("GroupID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AdGroupName")
+                        .IsRequired();
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("GroupName");
+                    b.Property<string>("GroupName")
+                        .IsRequired();
 
                     b.Property<string>("Phone");
+
+                    b.Property<string>("SubGroupName");
 
                     b.HasKey("GroupID");
 

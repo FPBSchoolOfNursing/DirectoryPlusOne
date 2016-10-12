@@ -8,9 +8,10 @@ using DirectoryPlusOne.DAL;
 namespace DirectoryPlusOne.Migrations
 {
     [DbContext(typeof(DirectoryContext))]
-    partial class DirectoryContextModelSnapshot : ModelSnapshot
+    [Migration("20161012183243_Adding Subgroup and AdGroup to Group Entity")]
+    partial class AddingSubgroupandAdGrouptoGroupEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -21,15 +22,13 @@ namespace DirectoryPlusOne.Migrations
                     b.Property<int>("GroupID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AdGroupName")
-                        .IsRequired();
+                    b.Property<string>("AdGroupName");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("GroupName")
-                        .IsRequired();
+                    b.Property<string>("GroupName");
 
                     b.Property<string>("Phone");
 

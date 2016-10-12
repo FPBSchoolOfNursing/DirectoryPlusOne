@@ -9,8 +9,7 @@ namespace DirectoryPlusOne.DAL
     public class DirectoryInitilizer
     {
         public static void Initialize(DirectoryContext context)
-        {
-            context.Database.EnsureDeleted();
+        {            
             context.Database.EnsureCreated();
             if (context.People.Any())
             {                
@@ -45,10 +44,11 @@ namespace DirectoryPlusOne.DAL
             }         
             context.SaveChanges();
 
-            var groups = new Group[] {
-                        new Group { GroupName = "nurs-dept-it", Description="Nursing IT", Email="fpbhelpdesk@case.edu" },
-                        new Group { GroupName = "utech", Description="uTech peeps", Email="utech@case.edu" },
-                        new Group { GroupName = "onlyonepersoninhere", Description="only1inhere", Email="onlyone@case.edu" },
+            var groups = new Group[] {                        
+                        new Group { GroupName = "Nursing", SubGroupName = "Staff", AdGroupName="nursing@staff.case.edu", Description="Nursing Staff", Email="fpb-staff@case.edu" },
+                        new Group { GroupName = "Nursing", SubGroupName = "Faculty", AdGroupName="nursing@faculty.case.edu", Description="Nursing Staff", Email="fpb-staff@case.edu" },
+                        new Group { GroupName = "Nursing", AdGroupName="nursing@case.edu", Description="Nursing School", Phone="216-368-4700" },
+                        new Group { GroupName = "Nursing" ,SubGroupName="IT", AdGroupName="nurs-dept-it", Description="Nursing School Hackers", Phone="216-368-6322" }
                 };
             foreach (Group g in groups)
             {
@@ -76,11 +76,11 @@ namespace DirectoryPlusOne.DAL
             var persongroups = new PersonGroup[] {
                     new PersonGroup {
                         CaseUserID = people.Single(a => a.LastName == "Contera").CaseUserID,
-                        GroupID = groups.Single(a => a.GroupName == "utech").GroupID
+                        GroupID = groups.Single(a => a.GroupName == "Nursing" && a.SubGroupName == "Staff").GroupID
                     },
                     new PersonGroup {
                         CaseUserID = people.Single(a => a.LastName == "Contera2").CaseUserID,
-                        GroupID = groups.Single(a => a.GroupName == "utech").GroupID
+                        GroupID = groups.Single(a => a.GroupName == "Nursing" && a.SubGroupName == null).GroupID
                     }
                 };
 

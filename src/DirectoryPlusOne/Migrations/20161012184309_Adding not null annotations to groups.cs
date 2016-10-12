@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DirectoryPlusOne.Migrations
 {
-    public partial class FirstWorkingState : Migration
+    public partial class Addingnotnullannotationstogroups : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

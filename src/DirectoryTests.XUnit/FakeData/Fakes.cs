@@ -45,6 +45,8 @@ namespace DirectoryTests.XUnit.FakeData
                         new Group { GroupID=1, GroupName = "nurs-dept-it", Description="Nursing IT", Email="fpbhelpdesk@case.edu" },
                         new Group { GroupID=2, GroupName = "utech", Description="uTech peeps", Email="utech@case.edu" },
                         new Group { GroupID=3, GroupName = "onlyonepersoninhere", Description="only1inhere", Email="onlyone@case.edu" },
+                        new Group { GroupID=4, GroupName="Nursing", Description="Get everyone in nursing" },
+                        new Group { GroupID=5, GroupName="Staff", Description="Get everyone in staff@nursing.case.edu" }
                 };
             }
         }
