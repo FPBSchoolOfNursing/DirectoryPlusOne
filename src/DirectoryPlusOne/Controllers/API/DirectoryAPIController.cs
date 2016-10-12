@@ -20,16 +20,24 @@ namespace DirectoryPlusOne.Controllers.API
         }
 
         // GET: directory
-        [HttpGet("{group}")]
-        public IEnumerable<DirectoryReturn> Get(string group)
+        [HttpGet("{group}", Name ="GetDirectoryByGroup")]
+        public IActionResult Get(string group)
         {
-            return GetDirectoryByGroup(group);
+            if(String.IsNullOrEmpty(group))
+            {
+                return NotFound();
+            }
+            return new ObjectResult(GetDirectoryByGroup(group));
         }
 
-        [HttpGet("{group}/{subgroup}")]
-        public IEnumerable<DirectoryReturn> Get(string group, string subgroup)
+        [HttpGet("{group}/{subgroup}", Name = "GetDirectoryBySubGroup")]
+        public IActionResult Get(string group, string subgroup)
         {
-            return GetDirectoryByGroup(subgroup);
+            if (String.IsNullOrEmpty(group) || String.IsNullOrEmpty(subgroup))
+            {
+                return NotFound();
+            }
+            return new ObjectResult(GetDirectoryByGroup(subgroup));            
         }
 
         private IEnumerable<DirectoryReturn> GetDirectoryByGroup(string querygroup)

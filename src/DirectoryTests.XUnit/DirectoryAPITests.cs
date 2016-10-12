@@ -6,6 +6,7 @@ using Xunit;
 using Moq;
 using DirectoryPlusOne.Controllers.API;
 using DirectoryPlusOne.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DirectoryTests.XUnit
 {
@@ -17,10 +18,11 @@ namespace DirectoryTests.XUnit
             //Arrage                   
             //Act
             var api = new DirectoryAPIController(mockContext.Object);
-            var directory = api.Get("utech");
-            DirectoryReturn firstresult = directory.FirstOrDefault();
+            ObjectResult directory = api.Get("utech");
+            DirectoryReturn[] results = directory.Value as DirectoryReturn[];
+            var firstresult = results.First();
             //Assert
-            Assert.True(directory.Count() > 0);
+            Assert.True(results.Count() > 0);
             Assert.Equal("abc123@case.edu", firstresult.Email);            
         }
     }
