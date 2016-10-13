@@ -46,8 +46,7 @@ namespace DirectoryPlusOne.Controllers.API
         }
         */
         private IEnumerable<DirectoryReturn> GetDirectoryByGroup(string querygroup)
-        {
-            int i = 0;
+        {            
             var directory = (from p in _context.People
                              join po in _context.PersonOffice on p.CaseUserID equals po.CaseUserID
                              join o in _context.Offices on po.OfficeID equals o.OfficeID
