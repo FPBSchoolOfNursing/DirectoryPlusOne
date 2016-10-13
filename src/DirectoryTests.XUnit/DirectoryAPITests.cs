@@ -12,17 +12,20 @@ namespace DirectoryTests.XUnit
 {
     public class DirectoryAPITests : DirectoryTestSetup
     {
-        [Fact]
+        [Fact]        
         public void DirectoryGroupAPIHTTPGetShouldReturnADirectoryObject()
         {
             //Arrage                   
             //Act
             var api = new DirectoryAPIController(mockContext.Object);
-            ObjectResult directory = api.Get("utech");
+            ObjectResult directory = api.Get("utech") as ObjectResult;           
             DirectoryReturn[] results = directory.Value as DirectoryReturn[];
-            var firstresult = results.First();
-            //Assert
+
+            //Assert    
+            Assert.NotNull(results);
             Assert.True(results.Count() > 0);
+
+            var firstresult = results.First();
             Assert.Equal("abc123@case.edu", firstresult.Email);            
         }
     }
