@@ -13,6 +13,9 @@ namespace DirectoryPlusOne.Controllers.API
     [Route("directory")]
     public class DirectoryAPIController : Controller
     {
+        /// <summary>
+        /// Remove this later. You will have the context in the services class that handles the API methods.
+        /// </summary>
         private readonly IDirectoryContext _context;
         public DirectoryAPIController(IDirectoryContext context)
         {
@@ -20,6 +23,7 @@ namespace DirectoryPlusOne.Controllers.API
         }
 
         // GET: directory
+        
         [HttpGet("{group}", Name ="GetDirectoryByGroup")]
         public IActionResult Get(string group)
         {
@@ -30,6 +34,7 @@ namespace DirectoryPlusOne.Controllers.API
             return new ObjectResult(GetDirectoryByGroup(group));
         }
 
+        /*        
         [HttpGet("{group}/{subgroup}", Name = "GetDirectoryBySubGroup")]
         public IActionResult Get(string group, string subgroup)
         {
@@ -39,9 +44,10 @@ namespace DirectoryPlusOne.Controllers.API
             }
             return new ObjectResult(GetDirectoryByGroup(subgroup));            
         }
-
+        */
         private IEnumerable<DirectoryReturn> GetDirectoryByGroup(string querygroup)
         {
+            int i = 0;
             var directory = (from p in _context.People
                              join po in _context.PersonOffice on p.CaseUserID equals po.CaseUserID
                              join o in _context.Offices on po.OfficeID equals o.OfficeID
@@ -59,8 +65,8 @@ namespace DirectoryPlusOne.Controllers.API
                              }).ToArray(); //returning arrays are more savvy)
             return directory;
         }
-
-        // GET api/values/5
+        
+        /* GET api/values/5*/
         [HttpGet("{id}")]
         public DirectoryReturn Get(int id)
         {
