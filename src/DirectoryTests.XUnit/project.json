@@ -1,5 +1,9 @@
 {
-  "buildOptions": {"copyToOutput": { "include": ["xunit.runner.json"]}},
+  "buildOptions": {
+    "copyToOutput": {
+      "include": [ "xunit.runner.json" ]
+    }
+  },
   "version": "1.0.0-*",
 
   "testRunner": "xunit",
