@@ -14,6 +14,47 @@ namespace DirectoryPlusOne.Helpers
         /// <param name="ADDomain">the FQDN Active Directory you wish to query, e.g ads.case.edu </param>
         /// <param name="userName">the persons username</param>
         /// <returns>A list of strings that contains all of thier ads groups.</returns>
+        public static string[] GetUserGroupsFromADS(string ADDomain, string userName)
+        {
+            string[] results = { };
+
+            LdapConnection conn = new LdapConnection();
+            try
+            {
+                conn.Connect(ADDomain, LdapConnection.DEFAULT_PORT);
+                conn.Bind(null, null);                
+               
+                string searchBase = "ou=People,o=cwru.edu,o=isp";
+                string searchFilter = "(uid=bdm4)";
+                //string searchFilter = "(uid=" + data + ")";
+                /*LdapSearchQueue queue =
+                   conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, null, false, (LdapSearchQueue)null, (LdapSearchConstraints)null);
+               */
+
+                LdapSearchResults searchResults = conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, new string[]{ LdapConnection.NO_ATTRS}, true);
+                while(searchResults.hasMore())
+                {
+                    LdapEntry nextEntry = null;
+                    nextEntry = searchResults.next();
+                    string cal = nextEntry.DN;
+                }
+            }
+            catch (LdapException ldapex)
+            {
+                throw ldapex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Disconnect();
+            }
+
+            return results;
+        }
+
 
         /*
         public static List<string> GetUserGroupsFromADS(string ADDomain, string userName)
