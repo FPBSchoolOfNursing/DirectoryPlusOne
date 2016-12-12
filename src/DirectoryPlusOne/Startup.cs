@@ -32,6 +32,7 @@ namespace DirectoryPlusOne
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
             services.AddDbContext<DirectoryContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("LocalDBConnection")));
 

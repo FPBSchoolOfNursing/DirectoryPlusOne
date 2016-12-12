@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DirectoryPlusOne.DAL;
 using DirectoryPlusOne.Models;
 using DirectoryPlusOne.DAL.Interfaces;
+using DirectoryPlusOne.Helpers;
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DirectoryPlusOne.Controllers.API
@@ -27,11 +28,19 @@ namespace DirectoryPlusOne.Controllers.API
         [HttpGet("{group}", Name ="GetDirectoryByGroup")]
         public IActionResult Get(string group)
         {
-            if(String.IsNullOrEmpty(group))
+            try
             {
-                return NotFound();
+
+                if (String.IsNullOrEmpty(group))
+                {
+                    return NotFound();
+                }
+                return new ObjectResult(GetDirectoryByGroup(group));
             }
-            return new ObjectResult(GetDirectoryByGroup(group));
+            catch(Exception ex)
+            {
+                return NotFound(ex); 
+            }
         }
 
         /*        
@@ -46,7 +55,15 @@ namespace DirectoryPlusOne.Controllers.API
         }
         */
         private IEnumerable<DirectoryReturn> GetDirectoryByGroup(string querygroup)
-        {            
+        {
+            try
+            {
+                var delete = ActiveDirectory.GetUserGroupsFromADS("ads.case.edu", "bdm4");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             var directory = (from p in _context.People
                              join po in _context.PersonOffice on p.CaseUserID equals po.CaseUserID
                              join o in _context.Offices on po.OfficeID equals o.OfficeID

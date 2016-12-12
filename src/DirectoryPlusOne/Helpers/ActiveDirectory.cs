@@ -17,26 +17,29 @@ namespace DirectoryPlusOne.Helpers
         public static string[] GetUserGroupsFromADS(string ADDomain, string userName)
         {
             string[] results = { };
-
-            LdapConnection conn = new LdapConnection();
+            
             try
             {
-                conn.Connect(ADDomain, LdapConnection.DEFAULT_PORT);
-                conn.Bind(null, null);                
-               
-                string searchBase = "ou=People,o=cwru.edu,o=isp";
-                string searchFilter = "(uid=bdm4)";
-                //string searchFilter = "(uid=" + data + ")";
-                /*LdapSearchQueue queue =
-                   conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, null, false, (LdapSearchQueue)null, (LdapSearchConstraints)null);
-               */
-
-                LdapSearchResults searchResults = conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, new string[]{ LdapConnection.NO_ATTRS}, true);
-                while(searchResults.hasMore())
+                using (LdapConnection conn = new LdapConnection())
                 {
-                    LdapEntry nextEntry = null;
-                    nextEntry = searchResults.next();
-                    string cal = nextEntry.DN;
+                    conn.Connect(ADDomain, LdapConnection.DEFAULT_PORT);
+                    //conn.Bind(null, null);
+                    conn.Bind("nurs-ads-bdm4", "");
+
+                    string searchBase = "ou=People,o=cwru.edu,o=isp";
+                    string searchFilter = "(objectClass=*)";
+                    //string searchFilter = "(uid=" + data + ")";
+                    /*LdapSearchQueue queue =
+                       conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, null, false, (LdapSearchQueue)null, (LdapSearchConstraints)null);
+                   */
+
+                    LdapSearchResults searchResults = conn.Search(searchBase, LdapConnection.SCOPE_ONE, searchFilter, new string[] { LdapConnection.NO_ATTRS }, true);
+                    while (searchResults.hasMore())
+                    {
+                        LdapEntry nextEntry = null;
+                        nextEntry = searchResults.next();
+                        string cal = nextEntry.DN;
+                    }
                 }
             }
             catch (LdapException ldapex)
@@ -46,12 +49,8 @@ namespace DirectoryPlusOne.Helpers
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                conn.Disconnect();
-            }
-
+            }               
+            
             return results;
         }
 

@@ -13,7 +13,7 @@
     "Microsoft.AspNetCore.Mvc": "1.0.1",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
-    "Novell.Directory.Ldap.NETStandard": "2.3.3"
+    "Novell.Directory.Ldap.NETStandard": "2.3.5"
   },
 
   "tools": {
